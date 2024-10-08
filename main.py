@@ -1,23 +1,7 @@
 import streamlit as st
-import cv2
 
-def main():
-    st.set_page_config(page_title="Streamlit WebCam App")
-    st.title("Webcam Display Steamlit App")
-    st.caption("Powered by OpenCV, Streamlit")
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-    frame_placeholder = st.empty()
-    stop_button_pressed = st.button("Stop")
-    while cap.isOpened() and not stop_button_pressed:
-        ret, frame = cap.read()
-        if not ret:
-            st.write("Video Capture Ended")
-            break
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        frame_placeholder.image(frame, channels="RGB")
-        if cv2.waitKey(1) & 0xFF == ord("q") or stop_button_pressed:
-            break
-    cap.release()
+enable = st.checkbox("Enable camera")
+picture = st.camera_input("Take a picture", disabled=not enable)
 
-if __name__ == "__main__":
-    main()
+if picture:
+    st.image(picture)
