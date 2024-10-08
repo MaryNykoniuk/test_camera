@@ -5,7 +5,7 @@ def main():
     st.set_page_config(page_title="Streamlit WebCam App")
     st.title("Webcam Display Steamlit App")
     st.caption("Powered by OpenCV, Streamlit")
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     frame_placeholder = st.empty()
     stop_button_pressed = st.button("Stop")
     while cap.isOpened() and not stop_button_pressed:
